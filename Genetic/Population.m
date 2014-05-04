@@ -9,6 +9,7 @@
 #import "Population.h"
 
 #define ARC4RANDOM_MAX      0x100000000
+
 @implementation Population
 
 - (instancetype)initWithPopulation:(NSArray*)population
@@ -60,8 +61,7 @@
         
         birey.fitnessProbabilility = [birey calculateFitness]*1.0/sum;
         //  NSLog(@"Fitness of birey:%d is %f",idx,birey.fitnessProbabilility*100);
-        
-    }];
+        }];
     
 }
 - (void)makeSelection{

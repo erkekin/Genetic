@@ -16,5 +16,5 @@
 - (int)calculateFitness;
 - (Individual *)crossOverBireyWithBirey:(Individual *)birey2
                 withCrossOverPoint:(int)point;
-
+- (void)mutateWithRatio:(float)ratio;
 @end

@@ -53,5 +53,16 @@
     return self.geneticCode;
 }
 
+- (void)mutateWithRatio:(float)ratio{
+    
+    int bit = arc4random() %2;
+    NSRange range = NSMakeRange(bit,1);
+    
+    if ([[self.geneticCode substringWithRange:range] intValue]){
+       self.geneticCode = [self.geneticCode   stringByReplacingOccurrencesOfString:@"1" withString:@"0" options:NSLiteralSearch range:range];
+    }  else{
+      self.geneticCode =  [self.geneticCode   stringByReplacingOccurrencesOfString:@"0" withString:@"1" options:NSLiteralSearch range:range];
+    }
+}
 @end
 
