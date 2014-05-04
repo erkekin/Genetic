@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+#import "Birey.h"
+
 @interface ViewController ()
 {
     NSMutableArray* population;
@@ -28,30 +30,53 @@
             
             [string appendString:[NSString stringWithFormat:@"%d",arc4random() % 2]];
         }
-        [population addObject:string];
+        Birey * birey = [[Birey alloc] initWithGeneticCode:string];
+        [population addObject:birey];
     }
     
     NSLog(@"toplam %d", [self getSumOfOnesInPopulation]);
-   
+    
+    Birey * cocuk = [self crossOverBirey:population[0] withBirey:population[1] withCrossOverPoint:4];
+    NSLog(@"yeni eleman: %@",cocuk.geneticCode);
     
 }
+
+- (Birey *)crossOverBirey:(Birey *)birey1
+                withBirey:(Birey *)birey2
+       withCrossOverPoint:(int)point{
+    
+    if (birey1.geneticCode.length != birey2.geneticCode.length)
+        return nil;
+    
+    NSRange  range1 = NSMakeRange(0, point);
+    NSRange  range2 = NSMakeRange(point, birey2.geneticCode.length-point);
+    
+    NSString * segment1 = [birey1.geneticCode substringWithRange:range1];
+    NSString * segment2 = [birey2.geneticCode substringWithRange:range2];
+    
+    Birey * yeniBirey = [[Birey alloc] initWithGeneticCode:[NSString stringWithFormat:@"%@%@",segment1,segment2]];
+    
+    return yeniBirey;
+}
+
 - (int)getSumOfOnesInPopulation{
     __block int sum = 0;
     
-    [population enumerateObjectsUsingBlock:^(NSString * string, NSUInteger idx, BOOL *stop) {
+    [population enumerateObjectsUsingBlock:^(Birey * string, NSUInteger idx, BOOL *stop) {
         
-        NSLog(@"str: %@  - %d \n",string,  [self countOnesInString:string]);
-        sum += [self countOnesInString:string];
+        NSLog(@"str: %@  - %d \n",string,  [self countOnesInBirey:string]);
+        sum += [self countOnesInBirey:string];
     }];
     
     return sum;
 }
-- (int)countOnesInString:(NSString*)string{
+
+- (int)countOnesInBirey:(Birey*)birey{
     int sum = 0;
     
-    for (int i = 0; i<string.length; i++) {
+    for (int i = 0; i<birey.geneticCode.length; i++) {
         
-        if ([string characterAtIndex:i] == '1') {
+        if ([birey.geneticCode characterAtIndex:i] == '1') {
             
             sum++;
             
