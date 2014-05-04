@@ -5,9 +5,10 @@
 //  Created by Erk EKİN on 04/05/14.
 //  Copyright (c) 2014 erkekin. All rights reserved.
 //
-#import "Birey.h"
+#import "Individual.h"
 #import "Population.h"
 
+#define ARC4RANDOM_MAX      0x100000000
 @implementation Population
 
 - (instancetype)initWithPopulation:(NSArray*)population
@@ -33,35 +34,57 @@
                 
                 [geneticCode appendString:[NSString stringWithFormat:@"%d",arc4random() % 2]];
             }
-            Birey * birey = [[Birey alloc] initWithGeneticCode:geneticCode];
+            Individual * birey = [[Individual alloc] initWithGeneticCode:geneticCode];
             [self.population addObject:birey];
         }
-
-        
         
     }
     return self;
 }
-- (int) getSumOfOnesInPopulation{
+- (int)getSumOfFitnessValues{
     __block int sum = 0;
     
-    [self.population enumerateObjectsUsingBlock:^(Birey * birey, NSUInteger idx, BOOL *stop) {
+    [self.population enumerateObjectsUsingBlock:^(Individual * birey, NSUInteger idx, BOOL *stop) {
         
-        sum += [birey countOnes];
+        sum += [birey calculateFitness];
+        
     }];
     
     return sum;
 }
 
-- (void)selection{
+- (void)normalizeFitnessValues{
     
-    int sum = [self getSumOfOnesInPopulation];
-    [self.population enumerateObjectsUsingBlock:^(Birey * birey, NSUInteger idx, BOOL *stop) {
+    int sum = [self getSumOfFitnessValues];
+    [self.population enumerateObjectsUsingBlock:^(Individual * birey, NSUInteger idx, BOOL *stop) {
         
-        birey.probabilityToBeChosen = [birey countOnes]*1.0/sum;
-        NSLog(@"%f",birey.probabilityToBeChosen);
+        birey.fitnessProbabilility = [birey calculateFitness]*1.0/sum;
+        //  NSLog(@"Fitness of birey:%d is %f",idx,birey.fitnessProbabilility*100);
         
     }];
     
+}
+- (void)makeSelection{
+    
+    NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"fitnessProbabilility" ascending:NO];
+    NSArray *descriptors = [NSArray arrayWithObject:valueDescriptor];
+    
+    self.population = [[self.population sortedArrayUsingDescriptors:descriptors] mutableCopy];
+    
+    __block  NSMutableArray* selectedPopulation = [NSMutableArray arrayWithCapacity:self.population.count];
+    
+    __block float sum = 0;
+    float cumulativeRandomValue = (float)arc4random() / ARC4RANDOM_MAX;
+    
+    [self.population enumerateObjectsUsingBlock:^(Individual * birey, NSUInteger idx, BOOL *stop) {
+        
+        sum+=birey.fitnessProbabilility;
+        if (cumulativeRandomValue>sum) {
+            [selectedPopulation addObject:birey];
+        }
+        
+    }];
+
+    self.population = [NSMutableArray arrayWithArray:selectedPopulation];
 }
 @end

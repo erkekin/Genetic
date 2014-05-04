@@ -8,8 +8,9 @@
 
 #import "ViewController.h"
 
-#import "Birey.h"
+#import "Individual.h"
 #import "Population.h"
+
 
 @interface ViewController ()
 
@@ -21,19 +22,37 @@
 {
     [super viewDidLoad];
     
+}
+
+-(IBAction)createPopulation:(id)sender{
+    
     Population* population = [[Population alloc] initPopulationRandomlyWithBireyCount:10];
-    NSLog(@"toplam 1'ler (FITNESS): %d", [population getSumOfOnesInPopulation]);
+    NSLog(@"toplam 1'ler (FITNESS): %d", [population getSumOfFitnessValues]);
     
-    [population selection];
+    [population normalizeFitnessValues];
+    [population makeSelection];
     
-    Birey * birey1 = population.population[0];
-    Birey * birey2 = population.population[1];
+    __block  NSMutableArray* newPopulation = [NSMutableArray arrayWithCapacity:population.population.count];
     
-    Birey * cocuk = [birey1 crossOverBireyWithBirey:birey2 withCrossOverPoint:4];
+    [population.population enumerateObjectsUsingBlock:^(Individual * birey1, NSUInteger idx1, BOOL *stop1) {
+        [population.population enumerateObjectsUsingBlock:^(Individual * birey2, NSUInteger idx, BOOL *stop) {
+            
+            if (![birey1 isEqual:birey2]) {
+                
+                Individual * cocuk = [birey1 crossOverBireyWithBirey:birey2 withCrossOverPoint:birey1.geneticCode.length];
+                NSLog(@"Anne: %@",birey1.geneticCode);
+                NSLog(@"Baba: %@",birey2.geneticCode);
+                NSLog(@"Cocuk: %@",cocuk.geneticCode);
+                
+                [newPopulation addObject:cocuk];
+            }
+            
+        }];
+        
+    }];
     
-    NSLog(@"Anne: %@",birey1.geneticCode);
-    NSLog(@"Baba: %@",birey2.geneticCode);
-    NSLog(@"Cocuk: %@",cocuk.geneticCode);
+    population.population = newPopulation;
+    
     
 }
 

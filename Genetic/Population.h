@@ -16,7 +16,7 @@
 - (instancetype)initWithPopulation:(NSArray*)population;
 - (instancetype)initPopulationRandomlyWithBireyCount:(int)bireyCount;
 
-- (int)getSumOfOnesInPopulation;
-- (void)selection;
-
+- (int)getSumOfFitnessValues;
+- (void)normalizeFitnessValues;
+- (void)makeSelection;
 @end

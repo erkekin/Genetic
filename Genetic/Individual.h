@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Birey : NSObject
+@interface Individual : NSObject
 @property (strong, nonatomic) NSString * geneticCode;
-@property (readwrite) float probabilityToBeChosen;
+@property (readwrite) float fitnessProbabilility;
 
 - (instancetype)initWithGeneticCode:(NSString*)code;
-- (int)countOnes;
-- (Birey *)crossOverBireyWithBirey:(Birey *)birey2
+- (int)calculateFitness;
+- (Individual *)crossOverBireyWithBirey:(Individual *)birey2
                 withCrossOverPoint:(int)point;
 
 @end

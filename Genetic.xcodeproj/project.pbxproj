@@ -21,7 +21,7 @@
 		044C6D961912CA5400F9E6F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044C6D781912CA5400F9E6F2 /* UIKit.framework */; };
 		044C6D9E1912CA5400F9E6F2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 044C6D9C1912CA5400F9E6F2 /* InfoPlist.strings */; };
 		044C6DA01912CA5400F9E6F2 /* GeneticTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 044C6D9F1912CA5400F9E6F2 /* GeneticTests.m */; };
-		0462898F191641FC004DE574 /* Birey.m in Sources */ = {isa = PBXBuildFile; fileRef = 0462898E191641FC004DE574 /* Birey.m */; };
+		0462898F191641FC004DE574 /* Individual.m in Sources */ = {isa = PBXBuildFile; fileRef = 0462898E191641FC004DE574 /* Individual.m */; };
 		0476AF631916564D008990E7 /* Population.m in Sources */ = {isa = PBXBuildFile; fileRef = 0476AF621916564D008990E7 /* Population.m */; };
 /* End PBXBuildFile section */
 
@@ -55,8 +55,8 @@
 		044C6D9B1912CA5400F9E6F2 /* GeneticTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GeneticTests-Info.plist"; sourceTree = "<group>"; };
 		044C6D9D1912CA5400F9E6F2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		044C6D9F1912CA5400F9E6F2 /* GeneticTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneticTests.m; sourceTree = "<group>"; };
-		0462898D191641FC004DE574 /* Birey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Birey.h; sourceTree = "<group>"; };
-		0462898E191641FC004DE574 /* Birey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Birey.m; sourceTree = "<group>"; };
+		0462898D191641FC004DE574 /* Individual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Individual.h; sourceTree = "<group>"; };
+		0462898E191641FC004DE574 /* Individual.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Individual.m; sourceTree = "<group>"; };
 		0476AF611916564D008990E7 /* Population.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Population.h; sourceTree = "<group>"; };
 		0476AF621916564D008990E7 /* Population.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Population.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,8 +118,8 @@
 		044C6D7A1912CA5400F9E6F2 /* Genetic */ = {
 			isa = PBXGroup;
 			children = (
-				0462898D191641FC004DE574 /* Birey.h */,
-				0462898E191641FC004DE574 /* Birey.m */,
+				0462898D191641FC004DE574 /* Individual.h */,
+				0462898E191641FC004DE574 /* Individual.m */,
 				0476AF611916564D008990E7 /* Population.h */,
 				0476AF621916564D008990E7 /* Population.m */,
 				044C6D831912CA5400F9E6F2 /* AppDelegate.h */,
@@ -260,7 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				044C6D8B1912CA5400F9E6F2 /* ViewController.m in Sources */,
-				0462898F191641FC004DE574 /* Birey.m in Sources */,
+				0462898F191641FC004DE574 /* Individual.m in Sources */,
 				0476AF631916564D008990E7 /* Population.m in Sources */,
 				044C6D851912CA5400F9E6F2 /* AppDelegate.m in Sources */,
 				044C6D811912CA5400F9E6F2 /* main.m in Sources */,

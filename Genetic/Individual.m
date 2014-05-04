@@ -6,26 +6,21 @@
 //  Copyright (c) 2014 erkekin. All rights reserved.
 //
 
-#import "Birey.h"
+#import "Individual.h"
 
-@implementation Birey
+@implementation Individual
 
 - (instancetype)initWithGeneticCode:(NSString*)code
 {
     self = [super init];
     if (self) {
         self.geneticCode = code;
-        self.probabilityToBeChosen = 0;
+        self.fitnessProbabilility = 0;
     }
     return self;
 }
 
-- (NSString *)description
-{
-    return self.geneticCode;
-}
-
-- (int)countOnes{
+- (int)calculateFitness{
     int sum = 0;
     
     for (int i = 0; i<self.geneticCode.length; i++)
@@ -35,7 +30,7 @@
     return sum;
 }
 
-- (Birey *)crossOverBireyWithBirey:(Birey *)birey2
+- (Individual *)crossOverBireyWithBirey:(Individual *)birey2
        withCrossOverPoint:(int)point{
     
     if (self.geneticCode.length != birey2.geneticCode.length) return nil;
@@ -47,10 +42,15 @@
     NSString * segment1 = [self.geneticCode substringWithRange:range1];
     NSString * segment2 = [birey2.geneticCode substringWithRange:range2];
     
-    Birey * yeniBirey = [[Birey alloc] initWithGeneticCode:
+    Individual * yeniBirey = [[Individual alloc] initWithGeneticCode:
                          [NSString stringWithFormat:@"%@%@",segment1,segment2]];
     
     return yeniBirey;
+}
+
+- (NSString *)description
+{
+    return self.geneticCode;
 }
 
 @end
