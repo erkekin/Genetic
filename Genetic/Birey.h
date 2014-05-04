@@ -10,6 +10,11 @@
 
 @interface Birey : NSObject
 @property (strong, nonatomic) NSString * geneticCode;
+@property (readwrite) float probabilityToBeChosen;
 
 - (instancetype)initWithGeneticCode:(NSString*)code;
+- (int)countOnes;
+- (Birey *)crossOverBireyWithBirey:(Birey *)birey2
+                withCrossOverPoint:(int)point;
+
 @end
