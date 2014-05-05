@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0437596419180CFD00915ABB /* Population.m in Sources */ = {isa = PBXBuildFile; fileRef = 0476AF621916564D008990E7 /* Population.m */; };
 		044C6D751912CA5400F9E6F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044C6D741912CA5400F9E6F2 /* Foundation.framework */; };
 		044C6D771912CA5400F9E6F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044C6D761912CA5400F9E6F2 /* CoreGraphics.framework */; };
 		044C6D791912CA5400F9E6F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044C6D781912CA5400F9E6F2 /* UIKit.framework */; };
@@ -22,7 +23,6 @@
 		044C6D9E1912CA5400F9E6F2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 044C6D9C1912CA5400F9E6F2 /* InfoPlist.strings */; };
 		044C6DA01912CA5400F9E6F2 /* GeneticTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 044C6D9F1912CA5400F9E6F2 /* GeneticTests.m */; };
 		0462898F191641FC004DE574 /* Individual.m in Sources */ = {isa = PBXBuildFile; fileRef = 0462898E191641FC004DE574 /* Individual.m */; };
-		0476AF631916564D008990E7 /* Population.m in Sources */ = {isa = PBXBuildFile; fileRef = 0476AF621916564D008990E7 /* Population.m */; };
 		FF0023EE1917B4F800F4D3C0 /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0023ED1917B4F800F4D3C0 /* Const.m */; };
 /* End PBXBuildFile section */
 
@@ -274,9 +274,9 @@
 			files = (
 				044C6D8B1912CA5400F9E6F2 /* ViewController.m in Sources */,
 				0462898F191641FC004DE574 /* Individual.m in Sources */,
-				0476AF631916564D008990E7 /* Population.m in Sources */,
 				FF0023EE1917B4F800F4D3C0 /* Const.m in Sources */,
 				044C6D851912CA5400F9E6F2 /* AppDelegate.m in Sources */,
+				0437596419180CFD00915ABB /* Population.m in Sources */,
 				044C6D811912CA5400F9E6F2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

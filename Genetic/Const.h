@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface Const : NSObject
-
+extern float const CrossOverRate;
 extern float const MutationRate;
 extern int const CodeLenght;
 extern int const PopulationSize;

@@ -56,7 +56,7 @@
     }];
 }
 
-- (void)crossOver{
+- (void)crossOver{ // one-cut-point
     
     __block  NSMutableArray* newPopulation = [NSMutableArray arrayWithCapacity:self.population.count];
     

@@ -9,7 +9,8 @@
 #import "Const.h"
 
 @implementation Const
+float const CrossOverRate = 0.25;
 float const MutationRate = 0.1;
-int const  CodeLenght = 50;
+int const  CodeLenght = 20;
 int const  PopulationSize = 100;
 @end
