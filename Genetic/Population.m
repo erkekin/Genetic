@@ -58,26 +58,52 @@
 
 - (void)crossOver{ // one-cut-point
     
-    __block  NSMutableArray* newPopulation = [NSMutableArray arrayWithCapacity:self.population.count];
-    
-    int i = 0;
-    
-    while (i<PopulationSize) {
-        if (!self.population.count) {
-            return;
-        }
-        Individual * individual1 =  self.population[arc4random() % self.population.count];
-        Individual * individual2 =  self.population[arc4random() % self.population.count];
-        
-        if (![individual1 isEqual:individual2]) {
-            
-            Individual * cocuk = [individual1 crossOverBireyWithBirey:individual2 withCrossOverPoint:CodeLenght/2];
-            [newPopulation addObject:cocuk];
-            
-        }
-        
-        i++;
+    if (!self.population.count) {
+        return;
     }
+    int crossOverCount = self.population.count * CrossOverRate;
+
+   NSMutableSet * crossingOverGuys = [NSMutableSet setWithCapacity:crossOverCount];
+   
+   while (crossingOverGuys.count != crossOverCount) {
+       
+       Individual * individual = self.population[arc4random() % self.population.count];
+       [crossingOverGuys addObject:individual];
+       
+   }
+    
+    NSArray * array = crossingOverGuys.allObjects;
+        for (int i = 0; i<array.count; i++) {
+    
+            for (int j = i+1; j<array.count; j++) {
+                Individual * individual1 = array[i];
+                Individual * individual2 = array[j];
+                [individual1 crossOverWithBirey:individual2 withCrossOverPoint:individual1.geneticCode.length/2];
+            }
+        }
+    [self.population addObjectsFromArray:array];
+    
+//
+//    __block  NSMutableArray* newPopulation = [NSMutableArray arrayWithCapacity:self.population.count];
+//    
+//    int i = 0;
+//    
+//    while (i<PopulationSize) {
+//        if (!self.population.count) {
+//            return;
+//        }
+//        Individual * individual1 =  self.population[arc4random() % self.population.count];
+//        Individual * individual2 =  self.population[arc4random() % self.population.count];
+//        
+//        if (![individual1 isEqual:individual2]) {
+//            
+//            Individual * cocuk = [individual1 crossOverBireyWithBirey:individual2 withCrossOverPoint:CodeLenght/2];
+//            [newPopulation addObject:cocuk];
+//            
+//        }
+//        
+//        i++;
+//    }
     
     
         //    for (int i = 0; i<population.population.count; i++) {
@@ -90,7 +116,7 @@
         //        }
         //    }
         //    
-    self.population = newPopulation;
+ //   self.population = newPopulation;
 
 }
 - (int)getSumOfFitnessValues{
@@ -116,7 +142,9 @@
     }];
     
 }
-- (void)sortFitnessValues {
+
+- (void)sortFitnessValues { // Descending
+    
     NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"fitnessProbabilility" ascending:NO];
     NSArray *descriptors = [NSArray arrayWithObject:valueDescriptor];
     
@@ -143,5 +171,19 @@
     }];
     
     self.population = [NSMutableArray arrayWithArray:selectedPopulation];
+}
+
+- (void)mutate{
+    if (!self.population.count) {
+        return;
+    }
+    int mutationCount = self.population.count * MutationRate;
+    NSMutableSet * mutantGuys = [NSMutableSet setWithCapacity:mutationCount];
+
+    while (mutantGuys.count != mutationCount) {
+        
+      Individual*individual =  self.population[arc4random() % self.population.count];
+        [mutantGuys addObject:individual];
+    }
 }
 @end

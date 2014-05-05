@@ -21,5 +21,5 @@
 - (void)makeSelection;
 - (void)print;
 - (void)crossOver;
-
+- (void)mutate;
 @end

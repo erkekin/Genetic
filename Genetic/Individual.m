@@ -47,17 +47,28 @@
     
     return yeniBirey;
 }
+- (void)crossOverWithBirey:(Individual *)individual
+        withCrossOverPoint:(int)point{
+    
+    if (self.geneticCode.length != individual.geneticCode.length) return ;
+    if (point<0 || point>self.geneticCode.length) return ;
+    
+    NSRange  range1 = NSMakeRange(0, point);
+    NSRange  range2 = NSMakeRange(point, individual.geneticCode.length-point);
+    
+    NSString * locus1 = [self.geneticCode substringWithRange:range1];
+    NSString * locus2 = [individual.geneticCode substringWithRange:range2];
+    
+    self.geneticCode =[NSString stringWithFormat:@"%@%@",locus1,locus2];
 
+}
 - (NSString *)description
 {
     return self.geneticCode;
 }
 
-- (void)mutateWithRatio:(float)ratio{
+- (void)mutate{
     
-    int mutationCount = self.geneticCode.length * ratio;
-    
-    for (int i = 0; i<mutationCount; i++) {
         int bit = arc4random() % self.geneticCode.length;
         NSRange range = NSMakeRange(bit,1);
         
@@ -66,7 +77,7 @@
         }  else{
             self.geneticCode =  [self.geneticCode   stringByReplacingOccurrencesOfString:@"0" withString:@"1" options:NSLiteralSearch range:range];
         }
-    }
+    
 }
 @end
 

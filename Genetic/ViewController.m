@@ -1,10 +1,10 @@
-    //
-    //  ViewController.m
-    //  Genetic
-    //
-    //  Created by Erk EKİN on 01/05/14.
-    //  Copyright (c) 2014 erkekin. All rights reserved.
-    //
+//
+//  ViewController.m
+//  Genetic
+//
+//  Created by Erk EKİN on 01/05/14.
+//  Copyright (c) 2014 erkekin. All rights reserved.
+//
 
 #import "ViewController.h"
 
@@ -19,35 +19,32 @@
 
 @implementation ViewController
 
-- (IBAction)recombination {
-    
-    [population crossOver];
-        //  [population print];
-}
 
-- (IBAction)makeSelection:(id)sender{
-    
-    [population makeSelection];
-        //  [population print];
-    
-}
+
 - (IBAction)createPopulation:(id)sender{
     
     population = [[Population alloc] initPopulationRandomlyWithBireyCount:PopulationSize];
     
-        // [population print];
+    [population print];
 }
-
+- (IBAction)makeSelection:(id)sender{
+    
+    [population makeSelection];
+    [population print];
+    
+}
+- (IBAction)recombination {
+    
+    [population crossOver];
+    [population print];
+}
 - (IBAction)mutation{
     
-    [population.population enumerateObjectsUsingBlock:^(Individual * individual, NSUInteger idx, BOOL *stop) {
-        
-        [individual mutateWithRatio:MutationRate];
-        
-    }];
+    [population mutate];
     
-        // [population print];
+    [population print];
 }
+
 - (IBAction)iterate:(id)sender{
     
     [self createPopulation:sender];
@@ -59,6 +56,7 @@
         [self mutation];
         
     }
+    
     [population print];
 }
 @end
