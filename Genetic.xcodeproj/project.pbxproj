@@ -23,6 +23,7 @@
 		044C6DA01912CA5400F9E6F2 /* GeneticTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 044C6D9F1912CA5400F9E6F2 /* GeneticTests.m */; };
 		0462898F191641FC004DE574 /* Individual.m in Sources */ = {isa = PBXBuildFile; fileRef = 0462898E191641FC004DE574 /* Individual.m */; };
 		0476AF631916564D008990E7 /* Population.m in Sources */ = {isa = PBXBuildFile; fileRef = 0476AF621916564D008990E7 /* Population.m */; };
+		FF0023EE1917B4F800F4D3C0 /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0023ED1917B4F800F4D3C0 /* Const.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		0462898E191641FC004DE574 /* Individual.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Individual.m; sourceTree = "<group>"; };
 		0476AF611916564D008990E7 /* Population.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Population.h; sourceTree = "<group>"; };
 		0476AF621916564D008990E7 /* Population.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Population.m; sourceTree = "<group>"; };
+		FF0023EC1917B4F800F4D3C0 /* Const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
+		FF0023ED1917B4F800F4D3C0 /* Const.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Const.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,10 +121,9 @@
 		044C6D7A1912CA5400F9E6F2 /* Genetic */ = {
 			isa = PBXGroup;
 			children = (
-				0462898D191641FC004DE574 /* Individual.h */,
-				0462898E191641FC004DE574 /* Individual.m */,
-				0476AF611916564D008990E7 /* Population.h */,
-				0476AF621916564D008990E7 /* Population.m */,
+				FF0023EF1917B50000F4D3C0 /* Model */,
+				FF0023EC1917B4F800F4D3C0 /* Const.h */,
+				FF0023ED1917B4F800F4D3C0 /* Const.m */,
 				044C6D831912CA5400F9E6F2 /* AppDelegate.h */,
 				044C6D841912CA5400F9E6F2 /* AppDelegate.m */,
 				044C6D861912CA5400F9E6F2 /* Main.storyboard */,
@@ -160,6 +162,17 @@
 				044C6D9C1912CA5400F9E6F2 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FF0023EF1917B50000F4D3C0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0462898D191641FC004DE574 /* Individual.h */,
+				0462898E191641FC004DE574 /* Individual.m */,
+				0476AF611916564D008990E7 /* Population.h */,
+				0476AF621916564D008990E7 /* Population.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +275,7 @@
 				044C6D8B1912CA5400F9E6F2 /* ViewController.m in Sources */,
 				0462898F191641FC004DE574 /* Individual.m in Sources */,
 				0476AF631916564D008990E7 /* Population.m in Sources */,
+				FF0023EE1917B4F800F4D3C0 /* Const.m in Sources */,
 				044C6D851912CA5400F9E6F2 /* AppDelegate.m in Sources */,
 				044C6D811912CA5400F9E6F2 /* main.m in Sources */,
 			);

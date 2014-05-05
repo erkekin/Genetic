@@ -14,7 +14,7 @@
 
 - (instancetype)initWithGeneticCode:(NSString*)code;
 - (int)calculateFitness;
-- (Individual *)crossOverBireyWithBirey:(Individual *)birey2
+- (Individual *)crossOverBireyWithBirey:(Individual *)individual
                 withCrossOverPoint:(int)point;
 - (void)mutateWithRatio:(float)ratio;
 @end

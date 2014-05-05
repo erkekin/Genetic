@@ -20,4 +20,6 @@
 - (void)normalizeFitnessValues;
 - (void)makeSelection;
 - (void)print;
+- (void)crossOver;
+
 @end

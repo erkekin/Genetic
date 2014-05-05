@@ -30,20 +30,20 @@
     return sum;
 }
 
-- (Individual *)crossOverBireyWithBirey:(Individual *)birey2
+- (Individual *)crossOverBireyWithBirey:(Individual *)individual
                      withCrossOverPoint:(int)point{
     
-    if (self.geneticCode.length != birey2.geneticCode.length) return nil;
+    if (self.geneticCode.length != individual.geneticCode.length) return nil;
     if (point<0 || point>self.geneticCode.length) return nil;
     
     NSRange  range1 = NSMakeRange(0, point);
-    NSRange  range2 = NSMakeRange(point, birey2.geneticCode.length-point);
+    NSRange  range2 = NSMakeRange(point, individual.geneticCode.length-point);
     
-    NSString * segment1 = [self.geneticCode substringWithRange:range1];
-    NSString * segment2 = [birey2.geneticCode substringWithRange:range2];
+    NSString * locus1 = [self.geneticCode substringWithRange:range1];
+    NSString * locus2 = [individual.geneticCode substringWithRange:range2];
     
     Individual * yeniBirey = [[Individual alloc] initWithGeneticCode:
-                              [NSString stringWithFormat:@"%@%@",segment1,segment2]];
+                              [NSString stringWithFormat:@"%@%@",locus1,locus2]];
     
     return yeniBirey;
 }

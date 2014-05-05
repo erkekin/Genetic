@@ -21,15 +21,7 @@
     }
     return self;
 }
-- (void)print{
-    
-    NSLog(@"********** Nüfus: %d ************ Toplam Fitness: %d ******", self.population.count,[self getSumOfFitnessValues]);
-    [self.population enumerateObjectsUsingBlock:^(Individual * birey, NSUInteger idx, BOOL *stop) {
-        
-        NSLog(@"Birey:%d kod: '%@'",idx,birey.geneticCode);
-        
-    }];
-}
+
 - (instancetype)initPopulationRandomlyWithBireyCount:(int)bireyCount
 {
     self = [super init];
@@ -39,7 +31,7 @@
         
         for (int i = 0; i<bireyCount; i++) {
             NSMutableString * geneticCode = [NSMutableString string];
-            for (int j = 0; j<10; j++) {
+            for (int j = 0; j<CodeLenght; j++) {
                 
                 [geneticCode appendString:[NSString stringWithFormat:@"%d",arc4random() % 2]];
             }
@@ -50,12 +42,63 @@
     }
     return self;
 }
+
+- (void)print{
+    
+    NSLog(@"                                       ");
+    NSLog(@"********** Nüfus: %d ************ Toplam Fitness: %d ******", self.population.count,[self getSumOfFitnessValues]);
+    NSLog(@"                                       ");
+    
+    [self.population enumerateObjectsUsingBlock:^(Individual * individual, NSUInteger idx, BOOL *stop) {
+        
+        NSLog(@"Birey:%d kod: '%@'",idx,individual.geneticCode);
+        
+    }];
+}
+
+- (void)crossOver{
+    
+    __block  NSMutableArray* newPopulation = [NSMutableArray arrayWithCapacity:self.population.count];
+    
+    int i = 0;
+    
+    while (i<PopulationSize) {
+        if (!self.population.count) {
+            return;
+        }
+        Individual * individual1 =  self.population[arc4random() % self.population.count];
+        Individual * individual2 =  self.population[arc4random() % self.population.count];
+        
+        if (![individual1 isEqual:individual2]) {
+            
+            Individual * cocuk = [individual1 crossOverBireyWithBirey:individual2 withCrossOverPoint:CodeLenght/2];
+            [newPopulation addObject:cocuk];
+            
+        }
+        
+        i++;
+    }
+    
+    
+        //    for (int i = 0; i<population.population.count; i++) {
+        //
+        //        for (int j = i+1; j<population.population.count; j++) {
+        //            Individual * individual1 = population.population[i];
+        //            Individual * individual2 = population.population[j];
+        //            Individual * cocuk = [individual1 crossOverBireyWithBirey:individual2 withCrossOverPoint:individual1.geneticCode.length/2];
+        //            [newPopulation addObject:cocuk];
+        //        }
+        //    }
+        //    
+    self.population = newPopulation;
+
+}
 - (int)getSumOfFitnessValues{
     __block int sum = 0;
     
-    [self.population enumerateObjectsUsingBlock:^(Individual * birey, NSUInteger idx, BOOL *stop) {
+    [self.population enumerateObjectsUsingBlock:^(Individual * individual, NSUInteger idx, BOOL *stop) {
         
-        sum += [birey calculateFitness];
+        sum += [individual calculateFitness];
         
     }];
     
@@ -66,9 +109,9 @@
 {
     
     int sum = [self getSumOfFitnessValues];
-    [self.population enumerateObjectsUsingBlock:^(Individual * birey, NSUInteger idx, BOOL *stop) {
+    [self.population enumerateObjectsUsingBlock:^(Individual * individual, NSUInteger idx, BOOL *stop) {
         
-        birey.fitnessProbabilility = [birey calculateFitness]*1.0/sum;
+        individual.fitnessProbabilility = [individual calculateFitness]*1.0/sum;
         
     }];
     
@@ -80,7 +123,8 @@
     self.population = [[self.population sortedArrayUsingDescriptors:descriptors] mutableCopy];
 }
 
-- (void)makeSelection{
+- (void)makeSelection{ //Roulette Wheel
+    
     [self normalizeFitnessValues];
     [self sortFitnessValues];
     
@@ -89,11 +133,11 @@
     __block float sum = 0;
     float cumulativeRandomValue = (float)arc4random() / ARC4RANDOM_MAX;
     
-    [self.population enumerateObjectsUsingBlock:^(Individual * birey, NSUInteger idx, BOOL *stop) {
+    [self.population enumerateObjectsUsingBlock:^(Individual * individual, NSUInteger idx, BOOL *stop) {
         
-        sum+=birey.fitnessProbabilility;
+        sum+=individual.fitnessProbabilility;
         if (cumulativeRandomValue>sum) {
-            [selectedPopulation addObject:birey];
+            [selectedPopulation addObject:individual];
         }
         
     }];

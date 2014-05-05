@@ -11,7 +11,6 @@
 #import "Individual.h"
 #import "Population.h"
 
-
 @interface ViewController ()
 {
     Population*population;
@@ -22,43 +21,44 @@
 
 - (IBAction)recombination {
     
-    __block  NSMutableArray* newPopulation = [NSMutableArray arrayWithCapacity:population.population.count];
-    
-    for (int i = 0; i<population.population.count; i++) {
-        
-        for (int j = i+1; j<population.population.count; j++) {
-            Individual * birey1 = population.population[i];
-            Individual * birey2 = population.population[j];
-            Individual * cocuk = [birey1 crossOverBireyWithBirey:birey2 withCrossOverPoint:birey1.geneticCode.length/2];
-            [newPopulation addObject:cocuk];
-        }
-    }
-    population.population = newPopulation;
-    [population print];
+    [population crossOver];
+        //  [population print];
 }
 
 - (IBAction)makeSelection:(id)sender{
     
     [population makeSelection];
-    [population print];
+        //  [population print];
     
 }
 - (IBAction)createPopulation:(id)sender{
     
-    population = [[Population alloc] initPopulationRandomlyWithBireyCount:100];
+    population = [[Population alloc] initPopulationRandomlyWithBireyCount:PopulationSize];
     
-    [population print];
+        // [population print];
 }
 
 - (IBAction)mutation{
     
-    [population.population enumerateObjectsUsingBlock:^(Individual * birey2, NSUInteger idx, BOOL *stop) {
+    [population.population enumerateObjectsUsingBlock:^(Individual * individual, NSUInteger idx, BOOL *stop) {
         
-        [birey2 mutateWithRatio:0.1];
+        [individual mutateWithRatio:MutationRate];
         
     }];
     
+        // [population print];
+}
+- (IBAction)iterate:(id)sender{
+    
+    [self createPopulation:sender];
+    
+    for (int i = 0; i<40; i++) {
+        
+        [self makeSelection:sender];
+        [self recombination];
+        [self mutation];
+        
+    }
     [population print];
 }
-
 @end
