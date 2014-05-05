@@ -1,10 +1,10 @@
-//
-//  Population.m
-//  Genetic
-//
-//  Created by Erk EKİN on 04/05/14.
-//  Copyright (c) 2014 erkekin. All rights reserved.
-//
+    //
+    //  Population.m
+    //  Genetic
+    //
+    //  Created by Erk EKİN on 04/05/14.
+    //  Copyright (c) 2014 erkekin. All rights reserved.
+    //
 #import "Individual.h"
 #import "Population.h"
 
@@ -21,7 +21,15 @@
     }
     return self;
 }
-
+- (void)print{
+    
+    NSLog(@"********** Nüfus: %d ************ Toplam Fitness: %d ******", self.population.count,[self getSumOfFitnessValues]);
+    [self.population enumerateObjectsUsingBlock:^(Individual * birey, NSUInteger idx, BOOL *stop) {
+        
+        NSLog(@"Birey:%d kod: '%@'",idx,birey.geneticCode);
+        
+    }];
+}
 - (instancetype)initPopulationRandomlyWithBireyCount:(int)bireyCount
 {
     self = [super init];
@@ -54,22 +62,27 @@
     return sum;
 }
 
-- (void)normalizeFitnessValues{
+- (void)normalizeFitnessValues
+{
     
     int sum = [self getSumOfFitnessValues];
     [self.population enumerateObjectsUsingBlock:^(Individual * birey, NSUInteger idx, BOOL *stop) {
         
         birey.fitnessProbabilility = [birey calculateFitness]*1.0/sum;
-        //  NSLog(@"Fitness of birey:%d is %f",idx,birey.fitnessProbabilility*100);
-        }];
+        
+    }];
     
 }
-- (void)makeSelection{
-    
+- (void)sortFitnessValues {
     NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"fitnessProbabilility" ascending:NO];
     NSArray *descriptors = [NSArray arrayWithObject:valueDescriptor];
     
     self.population = [[self.population sortedArrayUsingDescriptors:descriptors] mutableCopy];
+}
+
+- (void)makeSelection{
+    [self normalizeFitnessValues];
+    [self sortFitnessValues];
     
     __block  NSMutableArray* selectedPopulation = [NSMutableArray arrayWithCapacity:self.population.count];
     
@@ -84,7 +97,7 @@
         }
         
     }];
-
+    
     self.population = [NSMutableArray arrayWithArray:selectedPopulation];
 }
 @end

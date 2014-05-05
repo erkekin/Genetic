@@ -19,4 +19,5 @@
 - (int)getSumOfFitnessValues;
 - (void)normalizeFitnessValues;
 - (void)makeSelection;
+- (void)print;
 @end
